@@ -1,6 +1,5 @@
-# springai-multillm-integration
+# Spring AI Multi-LLM Integration
 
-Spring AI Multi-LLM Integration - Gemini, OpenAI, Ollama
 
 ---
 
@@ -48,9 +47,11 @@ Docker should be installed and configured on your machine prior to creating the 
 
 Make sure to set your environment variables:
 
-```
+```shell
 export OPENAI_API_KEY="your-openai-api-key"
 export GEMINI_API_KEY="your-gemini-api-key"
+export ANTHROPIC_API_KEY="your-anthropic-api-key"
+export MISTRAL_API_KEY="your-mistral-api-key"
 ```
 
 To create the image, run the following goal:
@@ -112,7 +113,7 @@ If you manually switch to a different parent and actually want the inheritance, 
 
 ### Testing OpenAI
 
-```
+```http request
 http GET localhost:8100/chat \
   message=="What model are you? Please provide your name, version, and key capabilities." \
   llm==openai
@@ -134,7 +135,7 @@ http GET localhost:8100/chat \
 
 ### Testing Ollama
 
-```
+```http request
 http GET localhost:8100/chat \
   message=="What model are you? Please tell me your name, version, and what you're good at." \
   llm==ollama
@@ -155,7 +156,7 @@ http GET localhost:8100/chat \
 
 ### Testing Gemini
 
-```
+```http request
 http GET localhost:8100/chat \
   message=="Please identify yourself. What model are you, what version, and what are your strengths?" \
   llm==gemini

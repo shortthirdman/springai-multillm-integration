@@ -7,7 +7,10 @@ public enum LLMType {
 
     OPENAI("openai"),
     OLLAMA("ollama"),
-    GEMINI("gemini");
+    GEMINI("gemini"),
+    ANTHROPIC("anthropic"),
+    VERTEX("vertexai"),
+    MISTRAL("mistral");
 
     private final String value;
 
