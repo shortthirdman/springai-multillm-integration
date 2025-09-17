@@ -46,6 +46,13 @@ It is also possible to run your tests in a native image.
 If you're already familiar with Spring Boot container images support, this is the easiest way to get started.
 Docker should be installed and configured on your machine prior to creating the image.
 
+Make sure to set your environment variables:
+
+```
+export OPENAI_API_KEY="your-openai-api-key"
+export GEMINI_API_KEY="your-gemini-api-key"
+```
+
 To create the image, run the following goal:
 
 ```
@@ -100,3 +107,68 @@ If you manually switch to a different parent and actually want the inheritance, 
 ### References
 
 - [Integrate Multiple LLMs with Spring AI: OpenAI, Ollama and Gemini](https://medium.com/javarevisited/integrate-multiple-llms-with-spring-ai-openai-ollama-and-gemini-40d382136ce1)
+
+---
+
+### Testing OpenAI
+
+```
+http GET localhost:8100/chat \
+  message=="What model are you? Please provide your name, version, and key capabilities." \
+  llm==openai
+```
+
+**_Expected Sample Response_**
+
+```json
+{
+    "llm": "openai",
+    "originalMessage": "What model are you? Please provide your name, version, and key capabilities.",
+    "response": "I am ChatGPT, based on the GPT-4 architecture developed by OpenAI. My version includes improvements in understanding and generating human-like text, enabling me to assist with a wide range of tasks such as answering questions, providing explanations, composing creative writing, and more. I can understand context, handle complex prompts, and generate coherent and relevant responses across various topics.",
+    "timestamp": 1753268746222
+}
+
+```
+
+---
+
+### Testing Ollama
+
+```
+http GET localhost:8100/chat \
+  message=="What model are you? Please tell me your name, version, and what you're good at." \
+  llm==ollama
+```
+
+**_Expected Sample Response_**
+
+```json
+{
+    "llm": "ollama",
+    "originalMessage": "What model are you? Please tell me your name, version, and what you're good at.",
+    "response": " I am a model of the Chat Model developed by Mistral AI. My primary function is to assist with various tasks by providing information, answering questions, and engaging in conversation. I strive to provide precise, helpful, and courteous responses.\n\nWhile I don't have a personal name, you can think of me as your digital assistant designed to make your interactions more enjoyable and productive. My capabilities include but are not limited to: answering questions, providing explanations, discussing a wide range of topics, assisting with scheduling and organization, offering recommendations, and much more.\n\nIn terms of my version, I am part of the latest generation of models, continually learning and improving from the data it encounters during interactions like this one.",
+    "timestamp": 1753268772790
+}
+```
+
+---
+
+### Testing Gemini
+
+```
+http GET localhost:8100/chat \
+  message=="Please identify yourself. What model are you, what version, and what are your strengths?" \
+  llm==gemini
+```
+
+**_Expected Sample Response_**
+
+```json
+{
+    "llm": "gemini",
+    "originalMessage": "Please identify yourself. What model are you, what version, and what are your strengths?",
+    "response": "I am a large language model, trained by Google.\n\n**Model & Version:**\nUnlike traditional software with specific version numbers, large language models like me are continuously updated and refined. There isn't a single, publicly accessible \"version number\" in the way you might think of software like....",
+    "timestamp": 1753268800297
+}
+
+```
